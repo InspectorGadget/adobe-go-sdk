@@ -48,7 +48,7 @@ var (
 	ErrNotAuthenticated = errors.New("not authenticated")
 )
 
-func CreateNewAsset(auth auth.AdobeAuthenticationContext) (AdobeAssetResponse, error) {
+func CreateNewAsset(auth *auth.AdobeAuthenticationContext) (AdobeAssetResponse, error) {
 	if auth.GetAccessToken() == "" {
 		return AdobeAssetResponse{}, ErrNotAuthenticated
 	}
@@ -94,7 +94,7 @@ func CreateNewAsset(auth auth.AdobeAuthenticationContext) (AdobeAssetResponse, e
 	return jsonData, nil
 }
 
-func CompressPDF(auth auth.AdobeAuthenticationContext, fileData []byte) (AdobeJobStatusResponse, error) {
+func CompressPDF(auth *auth.AdobeAuthenticationContext, fileData []byte) (AdobeJobStatusResponse, error) {
 	if auth.GetAccessToken() == "" {
 		return AdobeJobStatusResponse{}, ErrNotAuthenticated
 	}
@@ -135,7 +135,7 @@ func CompressPDF(auth auth.AdobeAuthenticationContext, fileData []byte) (AdobeJo
 	return result, nil
 }
 
-func CreateCompressionJob(auth auth.AdobeAuthenticationContext, assetId string) (AdobeJobStatusResponse, error) {
+func CreateCompressionJob(auth *auth.AdobeAuthenticationContext, assetId string) (AdobeJobStatusResponse, error) {
 	if auth.GetAccessToken() == "" {
 		return AdobeJobStatusResponse{}, ErrNotAuthenticated
 	}
@@ -187,7 +187,7 @@ func CreateCompressionJob(auth auth.AdobeAuthenticationContext, assetId string) 
 	return value, nil
 }
 
-func GetJobStatus(auth auth.AdobeAuthenticationContext, compressResponse AdobeCompressResponse) (AdobeJobStatusResponse, error) {
+func GetJobStatus(auth *auth.AdobeAuthenticationContext, compressResponse AdobeCompressResponse) (AdobeJobStatusResponse, error) {
 	if auth.GetAccessToken() == "" {
 		return AdobeJobStatusResponse{}, ErrNotAuthenticated
 	}
@@ -240,5 +240,8 @@ func GetJobStatus(auth auth.AdobeAuthenticationContext, compressResponse AdobeCo
 		default:
 			return AdobeJobStatusResponse{}, fmt.Errorf("unknown job status: %s", jobResponse.Status)
 		}
+
 	}
+
+	return AdobeJobStatusResponse{}, fmt.Errorf("polling timed out")
 }

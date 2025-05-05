@@ -16,34 +16,34 @@ var (
 	AdobeSession *AdobeAuthenticationContext = &AdobeAuthenticationContext{}
 )
 
-func (c AdobeAuthenticationContext) setAccessToken(accessToken string) {
-	AdobeSession.AccessToken = accessToken
+func (c *AdobeAuthenticationContext) setAccessToken(accessToken string) {
+	c.AccessToken = accessToken
 }
 
-func (c AdobeAuthenticationContext) setExpiresIn(expiresIn int) {
-	AdobeSession.ExpiresIn = expiresIn
+func (c *AdobeAuthenticationContext) setExpiresIn(expiresIn int) {
+	c.ExpiresIn = expiresIn
 }
 
-func (c AdobeAuthenticationContext) setTokenType(tokenType string) {
-	AdobeSession.TokenType = tokenType
+func (c *AdobeAuthenticationContext) setTokenType(tokenType string) {
+	c.TokenType = tokenType
 }
 
-func (c AdobeAuthenticationContext) setClientID(clientID string) {
-	AdobeSession.ClientID = clientID
+func (c *AdobeAuthenticationContext) setClientID(clientID string) {
+	c.ClientID = clientID
 }
 
-func (c AdobeAuthenticationContext) GetAccessToken() string {
-	return AdobeSession.AccessToken
+func (c *AdobeAuthenticationContext) GetAccessToken() string {
+	return c.AccessToken
 }
 
-func (c AdobeAuthenticationContext) GetExpiresIn() int {
-	return AdobeSession.ExpiresIn
+func (c *AdobeAuthenticationContext) GetExpiresIn() int {
+	return c.ExpiresIn
 }
 
-func (c AdobeAuthenticationContext) GetTokenType() string {
-	return AdobeSession.TokenType
+func (c *AdobeAuthenticationContext) GetTokenType() string {
+	return c.TokenType
 }
 
-func (c AdobeAuthenticationContext) GetClientID() string {
-	return AdobeSession.ClientID
+func (c *AdobeAuthenticationContext) GetClientID() string {
+	return c.ClientID
 }

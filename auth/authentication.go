@@ -9,7 +9,7 @@ import (
 	"net/url"
 )
 
-func (i AdobeAuthInput) Authenticate() (*AdobeAuthenticationContext, error) {
+func (i *AdobeAuthInput) Authenticate() (*AdobeAuthenticationContext, error) {
 	response, err := http.PostForm(
 		"https://pdf-services.adobe.io/token",
 		url.Values{

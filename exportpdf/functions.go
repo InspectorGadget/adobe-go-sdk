@@ -53,7 +53,7 @@ var httpClient = &http.Client{
 	Timeout: 10 * time.Second, // Set a reasonable timeout
 }
 
-func CreateNewAsset(auth auth.AdobeAuthenticationContext, format string) (AdobeAssetResponse, error) {
+func CreateNewAsset(auth *auth.AdobeAuthenticationContext, format string) (AdobeAssetResponse, error) {
 	if auth.GetAccessToken() == "" {
 		return AdobeAssetResponse{}, ErrNotAuthenticated
 	}
@@ -99,7 +99,7 @@ func CreateNewAsset(auth auth.AdobeAuthenticationContext, format string) (AdobeA
 	return jsonData, nil
 }
 
-func ExportPDF(auth auth.AdobeAuthenticationContext, fileData []byte) (AdobeJobStatusResponse, error) {
+func ExportPDF(auth *auth.AdobeAuthenticationContext, fileData []byte) (AdobeJobStatusResponse, error) {
 	if auth.GetAccessToken() == "" {
 		return AdobeJobStatusResponse{}, ErrNotAuthenticated
 	}
@@ -135,7 +135,7 @@ func ExportPDF(auth auth.AdobeAuthenticationContext, fileData []byte) (AdobeJobS
 	return jobResponse, nil
 }
 
-func CreateExportJob(auth auth.AdobeAuthenticationContext, assetId string) (AdobeJobStatusResponse, error) {
+func CreateExportJob(auth *auth.AdobeAuthenticationContext, assetId string) (AdobeJobStatusResponse, error) {
 	if auth.GetAccessToken() == "" {
 		return AdobeJobStatusResponse{}, ErrNotAuthenticated
 	}
@@ -184,7 +184,7 @@ func CreateExportJob(auth auth.AdobeAuthenticationContext, assetId string) (Adob
 	return jobResponse, nil
 }
 
-func PollForStatus(auth auth.AdobeAuthenticationContext, url string) (AdobeJobStatusResponse, error) {
+func PollForStatus(auth *auth.AdobeAuthenticationContext, url string) (AdobeJobStatusResponse, error) {
 	if auth.GetAccessToken() == "" {
 		return AdobeJobStatusResponse{}, ErrNotAuthenticated
 	}
