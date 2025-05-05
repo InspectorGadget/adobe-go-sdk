@@ -206,7 +206,7 @@ func GetJobStatus(auth auth.AdobeAuthenticationContext, compressResponse AdobeCo
 	request.Header.Set("Authorization", "Bearer "+auth.GetAccessToken())
 	request.Header.Set("X-API-Key", auth.GetClientID())
 
-	for {
+	for range 30 { // Retry for a certain number of times. Default: 30
 		response, err := httpClient.Do(request)
 		if err != nil {
 			return AdobeJobStatusResponse{}, fmt.Errorf("failed to execute request: %w", err)
